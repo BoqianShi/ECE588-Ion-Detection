@@ -1,6 +1,7 @@
 # %%
 # ECE 588 Final Project
 # Ion Chain detection
+# Converted from jupyter notebook to python file
 
 # Group member: Ashrit Verma, Boqian Shi, Shaorong Ma
 
@@ -8,6 +9,8 @@
 
 # Import necessary libraries
 # Method 1 DoG
+
+# Don't run this code block first if running multiple images
 import matplotlib.pyplot as plt
 import numpy as np
 from skimage import io, filters, transform, color, exposure
@@ -24,10 +27,9 @@ def _difference_of_gaussians(image, low_sigma, preserve_range=True):
 
     return filt_image
 
-# Load the image
-image_path = 'eth_seven_pts.png' 
-
-
+# Uncomment the following line to use the example image
+# image_path = 'example.png' 
+# Else, we are using the dataset below. 
 # Grayscale Transform
 image = io.imread(image_path, as_gray=True)  
 
@@ -68,6 +70,8 @@ plt.show()
 
 # %%
 # Multiple images processing
+# Run this code block only once
+# Run first if running multiple images
 
 import os
 
@@ -75,6 +79,7 @@ import os
 dataset_directory = './dataset'
 
 # Iterate over all files in the dataset directory
+# Read all 10 images
 for filename in os.listdir(dataset_directory):
     file_path = os.path.join(dataset_directory, filename)
 
@@ -97,7 +102,7 @@ for filename in os.listdir(dataset_directory):
         scaled_image_rgb = exposure.equalize_adapthist(scaled_image_rgb)
 
 
-# %%
+## %%
 # Comparison methods:
 
 # 1. Median Filtering
@@ -376,7 +381,7 @@ hand_measured = [
     (547, 1033),
     (549, 1094)
 ]
-ion_num = 7  # Replace with your actual ion number
+ion_num = 7 
 
 # Sort lists by y-coordinate
 coords_sorted = sorted(coords[:ion_num], key=lambda x: x[1])
